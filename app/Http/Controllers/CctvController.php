@@ -14,7 +14,8 @@ class CctvController extends Controller
      */
     public function index()
     {
-        //
+        $cctvs = Cctv::all();
+        return view('pages.cctv.index', compact('cctvs'));
     }
 
     /**
@@ -24,7 +25,7 @@ class CctvController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.cctv.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class CctvController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'url' => 'required|url',
+        ]);
+
+        Cctv::create($data);
+        session()->flash('success');
+        return redirect(route('cctv.index'));
     }
 
     /**
@@ -57,7 +64,7 @@ class CctvController extends Controller
      */
     public function edit(Cctv $cctv)
     {
-        //
+        return view('pages.cctv.create', compact('cctv'));
     }
 
     /**
@@ -69,7 +76,13 @@ class CctvController extends Controller
      */
     public function update(Request $request, Cctv $cctv)
     {
-        //
+        $data = $request->validate([
+            'url' => 'required|url',
+        ]);
+        
+        $cctv->update($data);
+        session()->flash('success');
+        return redirect(route('cctv.index'));
     }
 
     /**
@@ -80,6 +93,8 @@ class CctvController extends Controller
      */
     public function destroy(Cctv $cctv)
     {
-        //
+        $cctv->delete();
+        session()->flash('success');
+        return redirect(route('cctv.index'));
     }
 }
