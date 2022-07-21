@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CctvController;
+use App\Http\Controllers\UserNeedController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-    Route::resource('cctv', CctvController::class);
+Route::prefix('admin')->group(function () {
+    Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
+        Route::get('/', function () {
+            return view('dashboard');
+        })->name('dashboard');
+        Route::resource('cctv', CctvController::class);
+        Route::resource('user_need', UserNeedController::class);
+    });
 });

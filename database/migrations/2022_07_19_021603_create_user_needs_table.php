@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('user_needs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->text('name');
+            $table->string('image');
             $table->string('guide_name');
             $table->timestamps();
         });

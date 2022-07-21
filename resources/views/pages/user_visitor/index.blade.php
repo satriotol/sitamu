@@ -1,16 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('CCTV') }}
+            {{ __('Kunjungan Tamu') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-10">
-                <a href="{{ route('cctv.create') }}"
+                <a href="{{ route('user_need.create') }}"
                     class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-lg">
-                    + Create CCTV
+                    + Create Kunjungan Tamu
                 </a>
             </div>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -18,20 +18,28 @@
                     <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th>URL</th>
+                                <th>Tanggal</th>
+                                <th>Pengunjung</th>
+                                <th>Pendamping</th>
+                                <th>Keperluan</th>
+                                <th>Bukti</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($cctvs as $cctv)
+                            @foreach ($user_needs as $user_need)
                                 <tr>
-                                    <td>{{ $cctv->url }}</td>
+                                    <td>{{ $user_need->created_at }}</td>
+                                    <td>{{ $user_need->user->name ?? '' }}</td>
+                                    <td>{{ $user_need->guide_name }}</td>
+                                    <td>{{ $user_need->name }}</td>
+                                    <td><img src="{{ $user_need->image }}" style="height: 100px" alt=""></td>
                                     <td><a class="inline-block border border-gray-700 bg-gray-700 text-white rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline"
-                                            href="{{ route('cctv.edit', $cctv->id) }}">
+                                            href="{{ route('user_need.edit', $user_need->id) }}">
                                             Edit
                                         </a>
-                                        <form class="inline-block" action='{{ route('cctv.destroy', $cctv->id) }}'
-                                            method="POST">
+                                        <form class="inline-block"
+                                            action='{{ route('user_need.destroy', $user_need->id) }}' method="POST">
                                             @method('delete')
                                             @csrf
                                             <button onclick="return confirm('Are you sure?')"
