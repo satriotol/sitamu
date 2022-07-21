@@ -15,3 +15,5 @@ yarn-error.log
 /.idea
 /.vscode
 public/uploads/image/
+vendor.zip
+sitamu.zip
