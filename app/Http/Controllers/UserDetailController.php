@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
+use Iman\Streamer\VideoStreamer;
 
 class UserDetailController extends Controller
 {
@@ -15,7 +16,7 @@ class UserDetailController extends Controller
      */
     public function index()
     {
-        $user_details = UserDetail::whereHas('user', function ($q){
+        $user_details = UserDetail::whereHas('user', function ($q) {
             $q->where('role', 'VISITOR');
         })->get();
         return view('pages.user_detail.index', compact('user_details'));
@@ -28,6 +29,8 @@ class UserDetailController extends Controller
      */
     public function create()
     {
+        $path = 'http://streaming.cctvsemarang.katalisindonesia.com/live/5euomh9otpDm6BvlRHC8bppjIEMBQeUROGghC_Ud352XV13LvlVdwGgiJvvpN8jL9DwuiyyxmO7yw-zJCE5JCpXcWAoSvFmG.m3u8';
+        
         return view('pages.user_detail.create');
     }
 
