@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,10 @@ class UserDetailController extends Controller
      */
     public function index()
     {
-        //
+        $user_details = UserDetail::whereHas('user', function ($q){
+            $q->where('role', 'VISITOR');
+        })->get();
+        return view('pages.user_detail.index', compact('user_details'));
     }
 
     /**
@@ -24,7 +28,7 @@ class UserDetailController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.user_detail.create');
     }
 
     /**
