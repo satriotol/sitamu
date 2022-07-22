@@ -31,7 +31,7 @@
                             name="guide_name" required class="form-control" type="text"
                             placeholder="Nama Pendamping">
                     </div>
-                    <video src="https://streaming.cctvsemarang.katalisindonesia.com/live/5euomh9otpDm6BvlRHC8bppjIEMBQeUROGghC_Ud352XV13LvlVdwGgiJvvpN8jL9DwuiyyxmO7yw-zJCE5JCpXcWAoSvFmG.m3u8">
+                    <video controls src="https://streaming.cctvsemarang.katalisindonesia.com/live/5euomh9otpDm6BvlRHC8bppjIEMBQeUROGghC_Ud352XV13LvlVdwGgiJvvpN8jL9DwuiyyxmO7yw-zJCE5JCpXcWAoSvFmG.m3u8">
                         Your browser does not support the VIDEO tag and/or RTP streams.
                       </video>
                     <div class="flex flex-wrap -mx-3 mb-6">
