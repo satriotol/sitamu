@@ -82,21 +82,22 @@
     <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
     <script>
         var video = document.getElementById('video');
-        var videoSrc = 'https://streaming.cctvsemarang.katalisindonesia.com/live/5euomh9otpDm6BvlRHC8bppjIEMBQeUROGghC_Ud352XV13LvlVdwGgiJvvpN8jL9DwuiyyxmO7yw-zJCE5JCpXcWAoSvFmG.m3u8';
+        var videoSrc =
+            'rtsp://admin:user1234@10.173.31.137:554/Streaming/Channels/101/';
         //
         // First check for native browser HLS support
         //
         if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          video.src = videoSrc;
-          //
-          // If no native HLS support, check if HLS.js is supported
-          //
+            video.src = videoSrc;
+            //
+            // If no native HLS support, check if HLS.js is supported
+            //
         } else if (Hls.isSupported()) {
-          var hls = new Hls();
-          hls.loadSource(videoSrc);
-          hls.attachMedia(video);
+            var hls = new Hls();
+            hls.loadSource(videoSrc);
+            hls.attachMedia(video);
         }
-      </script>
+    </script>
 </body>
 
 </html>
