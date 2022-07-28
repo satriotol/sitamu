@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CctvController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDetailController;
 use App\Http\Controllers\UserNeedController;
@@ -23,9 +24,7 @@ Route::get('/', function () {
 
 Route::prefix('admin')->group(function () {
     Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-        Route::get('/', function () {
-            return view('dashboard');
-        })->name('dashboard');
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('cctv', CctvController::class);
         Route::resource('user', UserController::class);
         Route::resource('user_need', UserNeedController::class);
