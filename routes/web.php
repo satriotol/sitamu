@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CctvController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDetailController;
 use App\Http\Controllers\UserNeedController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,7 @@ Route::prefix('admin')->group(function () {
             return view('dashboard');
         })->name('dashboard');
         Route::resource('cctv', CctvController::class);
+        Route::resource('user', UserController::class);
         Route::resource('user_need', UserNeedController::class);
         Route::resource('user_detail', UserDetailController::class);
     });
