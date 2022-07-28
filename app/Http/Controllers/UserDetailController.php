@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Iman\Streamer\VideoStreamer;
 
 class UserDetailController extends Controller
@@ -30,7 +31,7 @@ class UserDetailController extends Controller
     public function create()
     {
         $path = 'http://streaming.cctvsemarang.katalisindonesia.com/live/5euomh9otpDm6BvlRHC8bppjIEMBQeUROGghC_Ud352XV13LvlVdwGgiJvvpN8jL9DwuiyyxmO7yw-zJCE5JCpXcWAoSvFmG.m3u8';
-        
+
         return view('pages.user_detail.create');
     }
 
@@ -42,7 +43,26 @@ class UserDetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required',
+            'phone' => 'required',
+            'instansi' => 'required',
+        ]);
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'role' => 'VISITOR'
+        ]);
+        UserDetail::create([
+            'user_id' => $user->id,
+            'phone' => $data['phone'],
+            'instansi' => $data['instansi'],
+        ]);
+        session()->flash('success');
+        return redirect(route('user_detail.index'));
     }
 
     /**
@@ -62,9 +82,9 @@ class UserDetailController extends Controller
      * @param  \App\Models\UserDetail  $userDetail
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserDetail $userDetail)
+    public function edit(UserDetail $user_detail)
     {
-        //
+        return view('pages.user_detail.create', compact('user_detail'));
     }
 
     /**
@@ -74,9 +94,33 @@ class UserDetailController extends Controller
      * @param  \App\Models\UserDetail  $userDetail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserDetail $userDetail)
+    public function update(Request $request, UserDetail $user_detail)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $user_detail->user_id,
+            'password' => 'sometimes',
+            'phone' => 'required',
+            'instansi' => 'required',
+        ]);
+        if ($request->password != null) {
+            $user_detail->user->update([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+        } else {
+            $user_detail->user->update([
+                'name' => $data['name'],
+                'email' => $data['email'],
+            ]);
+        }
+        $user_detail->update([
+            'name' => $data['phone'],
+            'insntasi' => $data['instansi'],
+        ]);
+        session()->flash('success');
+        return redirect(route('user_detail.index'));
     }
 
     /**
@@ -85,8 +129,11 @@ class UserDetailController extends Controller
      * @param  \App\Models\UserDetail  $userDetail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserDetail $userDetail)
+    public function destroy(UserDetail $user_detail)
     {
-        //
+        $user_detail->delete();
+        $user_detail->user->delete();
+        session()->flash('success');
+        return redirect(route('user_detail.index'));
     }
 }

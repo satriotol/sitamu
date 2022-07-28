@@ -36,10 +36,6 @@
                     <input value="{{ isset($user_need) ? $user_need->name : old('name') }}" name="name"
                         required class="form-control" type="text" placeholder="Keperluan">
                 </div>
-                <video _ngcontent-ojx-c45="" muted="" loop="" playsinline="" preload="auto"
-                    controls="" crossorigin="" id="media_38084281-0209-4161-85e5-c5f87dd65ba8" autoplay=""
-                    src="rtsp://admin:user1234@10.173.31.137:554/Streaming/Channels/101/"
-                    __idm_id__="1925122"></video>
                 <div class="form-group">
                     <label>
                         Nama Pendamping

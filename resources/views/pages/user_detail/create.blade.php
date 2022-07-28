@@ -18,18 +18,37 @@
                     @endif
                     <div class="form-group">
                         <label>
-                            Keperluan
+                            Nama
                         </label>
-                        <input value="{{ isset($user_detail) ? $user_detail->name : old('name') }}" name="name"
-                            required class="form-control" type="text" placeholder="Keperluan">
+                        <input value="{{ isset($user_detail) ? $user_detail->user->name : old('name') }}" name="name"
+                            required class="form-control" type="text" placeholder="Nama">
                     </div>
                     <div class="form-group">
                         <label>
-                            Nama Pendamping
+                            Email
                         </label>
-                        <input value="{{ isset($user_detail) ? $user_detail->guide_name : old('guide_name') }}"
-                            name="guide_name" required class="form-control" type="text"
-                            placeholder="Nama Pendamping">
+                        <input value="{{ isset($user_detail) ? $user_detail->user->email : old('email') }}" name="email"
+                            required class="form-control" type="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Password
+                        </label>
+                        <input name="password" class="form-control" type="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Telepon
+                        </label>
+                        <input value="{{ isset($user_detail) ? $user_detail->phone : old('phone') }}" name="phone"
+                            required class="form-control" type="text" placeholder="Telepon">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Instansi
+                        </label>
+                        <input value="{{ isset($user_detail) ? $user_detail->instansi : old('instansi') }}" name="instansi"
+                            required class="form-control" type="text" placeholder="Instansi">
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3 text-right">
