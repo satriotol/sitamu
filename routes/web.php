@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CctvController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Frontend\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDetailController;
 use App\Http\Controllers\UserNeedController;
@@ -18,10 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('register', []);
+Route::get('/', [AuthController::class, 'index'])->name('frontend.login');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::prefix('admin')->group(function () {
     Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
