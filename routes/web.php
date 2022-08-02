@@ -31,6 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('cctv', CctvController::class);
     Route::resource('user', UserController::class);
     Route::resource('user_need', UserNeedController::class);
+    Route::post('user_need/visitor', [UserNeedController::class, 'user_need_visitor'])->name('user_need.visitor');
     Route::resource('user_detail', UserDetailController::class);
     Route::resource('role', RoleController::class);
     Route::resource('permission', PermissionController::class);
