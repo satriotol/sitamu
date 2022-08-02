@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class UserNeed extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'guide_name', 'image', 'name'];
+    protected $fillable = ['id', 'user_id', 'guide_name', 'image', 'name'];
 
     public function user()
     {
@@ -23,7 +23,7 @@ class UserNeed extends Model
     }
     public function getImageAttribute()
     {
-        $image = env('ASSET_URL') .'/uploads/' . $this->attributes['image'];
+        $image = env('ASSET_URL') . '/uploads/' . $this->attributes['image'];
         return $image;
     }
 }
