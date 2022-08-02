@@ -3,6 +3,7 @@
 use App\Http\Controllers\CctvController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Frontend\AuthController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDetailController;
@@ -31,4 +32,5 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::resource('user_need', UserNeedController::class);
     Route::resource('user_detail', UserDetailController::class);
     Route::resource('role', RoleController::class);
+    Route::resource('permission', PermissionController::class);
 });
