@@ -40,12 +40,13 @@ class UserNeedController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
+            'id' => 'nullable',
             'user_id' => 'required',
             'guide_name' => 'required',
             'name' => 'required',
             'image' => 'required|image',
         ]);
-
+        $data['id'] = Str::random(9);
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $name = $file->getClientOriginalName();
