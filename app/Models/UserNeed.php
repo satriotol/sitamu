@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class UserNeed extends Model
 {
     use HasFactory;
-    protected $fillable = ['id', 'user_id', 'guide_name', 'image', 'name'];
+    protected $fillable = ['user_id', 'guide_name', 'image', 'name'];
 
     public function user()
     {
