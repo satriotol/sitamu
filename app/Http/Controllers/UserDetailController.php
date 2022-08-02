@@ -53,8 +53,8 @@ class UserDetailController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 'VISITOR'
         ]);
+        dd($user->id);
         UserDetail::create([
             'user_id' => $user->id,
             'phone' => $data['phone'],
