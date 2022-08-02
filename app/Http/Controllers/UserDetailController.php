@@ -7,6 +7,7 @@ use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Iman\Streamer\VideoStreamer;
+use Spatie\Permission\Models\Role;
 
 class UserDetailController extends Controller
 {
@@ -17,9 +18,7 @@ class UserDetailController extends Controller
      */
     public function index()
     {
-        $user_details = UserDetail::whereHas('user', function ($q) {
-            $q->where('role', 'VISITOR');
-        })->get();
+        $user_details = UserDetail::all();
         return view('pages.user_detail.index', compact('user_details'));
     }
 
@@ -61,6 +60,9 @@ class UserDetailController extends Controller
             'phone' => $data['phone'],
             'instansi' => $data['instansi'],
         ]);
+        $role = Role::where('name', 'VISITOR')->first();
+        $user->assignRole($role->id);
+
         session()->flash('success');
         return redirect(route('user_detail.index'));
     }
@@ -119,6 +121,8 @@ class UserDetailController extends Controller
             'name' => $data['phone'],
             'insntasi' => $data['instansi'],
         ]);
+        $role = Role::where('name', 'VISITOR')->first();
+        $user_detail->user->assignRole($role->id);
         session()->flash('success');
         return redirect(route('user_detail.index'));
     }

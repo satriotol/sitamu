@@ -26,7 +26,7 @@ class UserNeedController extends Controller
      */
     public function create()
     {
-        $users = User::where('role', 'VISITOR')->get();
+        $users = User::role('VISITOR')->get();
         return view('pages.user_visitor.create', compact('users'));
     }
 
@@ -77,7 +77,7 @@ class UserNeedController extends Controller
      */
     public function edit(UserNeed $user_need)
     {
-        $users = User::where('role', 'VISITOR')->get();
+        $users = User::role('VISITOR')->get();
         return view('pages.user_visitor.create', compact('user_need', 'users'));
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -15,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('role', 'ADMIN')->get();
+        $users = User::role('ADMIN')->get();
         return view('pages.user.index', compact('users'));
     }
 
@@ -41,11 +42,11 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
-            'role' => 'nullable'
         ]);
         $data['password'] = Hash::make($data['password']);
-        $data['role'] = 'ADMIN';
-        User::create($data);
+        $user = User::create($data);
+        $role = Role::where('name', 'ADMIN')->first();
+        $user->assignRole($role->id);
         session()->flash('success');
         return redirect(route('user.index'));
     }
@@ -98,6 +99,8 @@ class UserController extends Controller
                 'email' => $data['email'],
             ]);
         }
+        $role = Role::where('name', 'ADMIN')->first();
+        $user->assignRole($role->id);
         session()->flash('success');
         return redirect(route('user.index'));
     }

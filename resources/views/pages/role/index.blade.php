@@ -26,7 +26,6 @@
                             @foreach ($roles as $role)
                                 <tr>
                                     <td>{{ $role->name }}</td>
-                                    <td>{{ $role->email }}</td>
                                     <td><a class="inline-block border border-gray-700 bg-gray-700 text-white rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline"
                                             href="{{ route('role.edit', $role->id) }}">
                                             Edit

@@ -44,11 +44,11 @@ class RoleController extends Controller
             'permission' => 'required',
         ]);
 
-        $role = Role::create(['name' => $request->input('name')]);
+        $role = Role::create(['name' => $request->input('name'), 'guard_name' => 'web',]);
         $role->syncPermissions($request->input('permission'));
 
         session()->flash('success');
-        return redirect()->route('pages.role.index');
+        return redirect()->route('role.index');
     }
 
     /**
@@ -97,7 +97,7 @@ class RoleController extends Controller
 
         $role->syncPermissions($request->input('permission'));
 
-        return redirect()->route('pages.role.index')
+        return redirect()->route('role.index')
             ->with('success', 'Role updated successfully');
     }
 
@@ -110,7 +110,7 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        return redirect()->route('pages.role.index')
+        return redirect()->route('role.index')
             ->with('success', 'Role deleted successfully');
     }
 }
