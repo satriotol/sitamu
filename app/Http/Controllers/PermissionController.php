@@ -12,6 +12,10 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('permission:daftar_permission', ['only' => ['index', 'store']]);
+    }
     public function index()
     {
         $permissions = Permission::get();

@@ -14,6 +14,10 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('permission:daftar_role');
+    }
     public function index()
     {
         $roles = Role::all();

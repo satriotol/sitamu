@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Stmt\Else_;
 
 class AuthController extends Controller
 {
@@ -21,18 +19,11 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
         if (Auth::attempt($credentials)) {
-            $user = User::where('email', $credentials['email'])->first();
-            if ($user->role == 'VISITOR') {
-                $request->session()->regenerate();
-                return redirect(route('dashboard'));
-            } else {
-                return back()->withErrors([
-                    'email' => 'Sayangnya Akun Anda Bukan Pengunjung',
-                ])->onlyInput('email');
-            }
+            $request->session()->regenerate();
+            return redirect(route('dashboard'));
         }
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'Oops Ada Error, Coba Ulangin Lagi',
         ])->onlyInput('email');
     }
     public function register()

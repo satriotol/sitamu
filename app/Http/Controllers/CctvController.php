@@ -12,6 +12,10 @@ class CctvController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('permission:daftar_cctv', ['only' => ['index', 'store']]);
+    }
     public function index()
     {
         $cctvs = Cctv::all();
@@ -79,7 +83,7 @@ class CctvController extends Controller
         $data = $request->validate([
             'url' => 'required|url',
         ]);
-        
+
         $cctv->update($data);
         session()->flash('success');
         return redirect(route('cctv.index'));

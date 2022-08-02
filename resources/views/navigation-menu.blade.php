@@ -16,37 +16,48 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('user_need.index') }}" :active="request()->routeIs('user_need.*')">
-                        {{ __('Daftar Kunjungan Tamu') }}
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('user_detail.index') }}" :active="request()->routeIs('user_detail.*')">
-                        {{ __('Daftar Tamu') }}
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('user.index') }}" :active="request()->routeIs('user.*')">
-                        {{ __('Daftar Admin') }}
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('role.index') }}" :active="request()->routeIs('role.*')">
-                        {{ __('Daftar Role') }}
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('permission.index') }}" :active="request()->routeIs('permission.*')">
-                        {{ __('Daftar Permission') }}
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('cctv.index') }}" :active="request()->routeIs('cctv.*')">
-                        {{ __('CCTV') }}
-                    </x-jet-nav-link>
-                </div>
-
+                @can('kunjungan_tamu')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('user_need.index') }}" :active="request()->routeIs('user_need.*')">
+                            {{ __('Daftar Kunjungan Tamu') }}
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
+                @can('daftar_tamu')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('user_detail.index') }}" :active="request()->routeIs('user_detail.*')">
+                            {{ __('Daftar Tamu') }}
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
+                @can('daftar_admin')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('user.index') }}" :active="request()->routeIs('user.*')">
+                            {{ __('Daftar Admin') }}
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
+                @can('daftar_role')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('role.index') }}" :active="request()->routeIs('role.*')">
+                            {{ __('Daftar Role') }}
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
+                @can('daftar_permission')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('permission.index') }}" :active="request()->routeIs('permission.*')">
+                            {{ __('Daftar Permission') }}
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
+                @can('daftar_cctv')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('cctv.index') }}" :active="request()->routeIs('cctv.*')">
+                            {{ __('CCTV') }}
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
