@@ -24,7 +24,7 @@ class AuthController extends Controller
             $user = User::where('email', $credentials['email'])->first();
             if ($user->role == 'VISITOR') {
                 $request->session()->regenerate();
-                return redirect()->intended('dashboard');
+                return redirect(route('dashboard'));
             } else {
                 return back()->withErrors([
                     'email' => 'Sayangnya Akun Anda Bukan Pengunjung',
