@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Iman\Streamer\VideoStreamer;
 use Spatie\Permission\Models\Role;
@@ -49,19 +50,24 @@ class UserDetailController extends Controller
             'phone' => 'required',
             'instansi' => 'required',
         ]);
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-        UserDetail::create([
-            'user_id' => $user->id,
-            'phone' => $data['phone'],
-            'instansi' => $data['instansi'],
-        ]);
-        $role = Role::where('name', 'VISITOR')->first();
-        $user->assignRole($role->id);
-
+        DB::beginTransaction();
+        try {
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+            UserDetail::create([
+                'user_id' => $user->id,
+                'phone' => $data['phone'],
+                'instansi' => $data['instansi'],
+            ]);
+            $role = Role::where('name', 'VISITOR')->first();
+            $user->assignRole($role->id);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
         session()->flash('success');
         return redirect(route('user_detail.index'));
     }
