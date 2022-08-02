@@ -66,6 +66,7 @@ class UserDetailController extends Controller
             $user->assignRole($role->id);
             DB::commit();
         } catch (\Exception $e) {
+            return $e->getMessage();
             DB::rollback();
         }
         session()->flash('success');
