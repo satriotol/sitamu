@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -16,7 +17,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::role('ADMIN')->get();
+        $users = User::whereHas('roles', function ($q) {
+            $q->where('name', '!=', 'VISITOR');
+        })->get();
         return view('pages.user.index', compact('users'));
     }
 
@@ -27,7 +30,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('pages.user.create');
+        $roles = Role::all();
+        return view('pages.user.create', compact('roles'));
     }
 
     /**
@@ -42,11 +46,11 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
+            'role' => 'required'
         ]);
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
-        $role = Role::where('name', 'ADMIN')->first();
-        $user->assignRole($role->id);
+        $user->assignRole($data['role']);
         session()->flash('success');
         return redirect(route('user.index'));
     }
@@ -70,7 +74,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('pages.user.create', compact('user'));
+        $roles = Role::all();
+        return view('pages.user.create', compact('user', 'roles'));
     }
 
     /**
@@ -86,6 +91,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'sometimes',
+            'role' => 'required'
         ]);
         if ($request->password != null) {
             $user->update([
@@ -99,8 +105,8 @@ class UserController extends Controller
                 'email' => $data['email'],
             ]);
         }
-        $role = Role::where('name', 'ADMIN')->first();
-        $user->assignRole($role->id);
+        DB::table('model_has_roles')->where('model_id', $user->id)->delete();
+        $user->assignRole($data['role']);
         session()->flash('success');
         return redirect(route('user.index'));
     }

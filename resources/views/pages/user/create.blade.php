@@ -37,16 +37,29 @@
                         <input value="" name="password" class="form-control" type="password"
                             placeholder="Password">
                     </div>
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                        <div class="w-full px-3 text-right">
-                            <button type="submit"
-                                class=" shadow-lg bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                                Save Kunjungan Tamu
-                            </button>
-                        </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <select class="form-control" data-width="100%" required name="role">
+                            <option value="">Select OPD</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}"
+                                    @isset($user) @if ($role->id === $user->roles[0]->id) selected @endif
+                                @endisset>
+                                {{ $role->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full px-3 text-right">
+                        <button type="submit"
+                            class=" shadow-lg bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                            Save Kunjungan Tamu
+                        </button>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 </x-app-layout>
