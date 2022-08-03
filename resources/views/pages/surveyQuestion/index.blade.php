@@ -1,16 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Kunjungan Tamu') }}
+            {{ __('Survey') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-10">
-                <a href="{{ route('user_need.create') }}"
+                <a href="{{ route('surveyQuestion.create') }}"
                     class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow-lg">
-                    + Create Kunjungan Tamu
+                    + Create Survey
                 </a>
             </div>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -18,30 +18,17 @@
                     <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Tanggal</th>
-                                <th>Pengunjung</th>
-                                <th>Pendamping</th>
-                                <th>Keperluan</th>
-                                <th>Total Nilai</th>
-                                <th>Bukti</th>
+                                <th>Pertanyaan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($user_needs as $user_need)
+                            @foreach ($surveyQuestions as $surveyQuestion)
                                 <tr>
-                                    <td>{{ $user_need->created_at }}</td>
-                                    <td>{{ $user_need->user->name ?? '' }}</td>
-                                    <td>{{ $user_need->guide_name }}</td>
-                                    <td>{{ $user_need->name }}</td>
-                                    <td>{{ $user_need->survey_answers->sum('value') }}</td>
-                                    <td><img src="{{ $user_need->image }}" style="height: 100px" alt=""></td>
-                                    <td><a class="inline-block border border-gray-700 bg-gray-700 text-white rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline"
-                                            href="{{ route('user_need.edit', $user_need->id) }}">
-                                            Edit
-                                        </a>
+                                    <td>{{ $surveyQuestion->question }}</td>
+                                    <td>
                                         <form class="inline-block"
-                                            action='{{ route('user_need.destroy', $user_need->id) }}' method="POST">
+                                            action='{{ route('surveyQuestion.destroy', $surveyQuestion->id) }}' method="POST">
                                             @method('delete')
                                             @csrf
                                             <button onclick="return confirm('Are you sure?')"

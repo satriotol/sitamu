@@ -37,6 +37,20 @@
                         </x-jet-nav-link>
                     </div>
                 @endcan
+                @can('daftar_cctv')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('cctv.index') }}" :active="request()->routeIs('cctv.*')">
+                            {{ __('CCTV') }}
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
+                @can('daftar_cctv')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('surveyQuestion.index') }}" :active="request()->routeIs('surveyQuestion.*')">
+                            {{ __('Survey') }}
+                        </x-jet-nav-link>
+                    </div>
+                @endcan
                 @can('daftar_role')
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-jet-nav-link href="{{ route('role.index') }}" :active="request()->routeIs('role.*')">
@@ -48,13 +62,6 @@
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-jet-nav-link href="{{ route('permission.index') }}" :active="request()->routeIs('permission.*')">
                             {{ __('Daftar Permission') }}
-                        </x-jet-nav-link>
-                    </div>
-                @endcan
-                @can('daftar_cctv')
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-jet-nav-link href="{{ route('cctv.index') }}" :active="request()->routeIs('cctv.*')">
-                            {{ __('CCTV') }}
                         </x-jet-nav-link>
                     </div>
                 @endcan

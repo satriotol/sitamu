@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Frontend\AuthController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SurveyQuestionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDetailController;
 use App\Http\Controllers\UserNeedController;
@@ -35,4 +36,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('user_detail', UserDetailController::class);
     Route::resource('role', RoleController::class);
     Route::resource('permission', PermissionController::class);
+    Route::resource('surveyQuestion', SurveyQuestionController::class);
 });

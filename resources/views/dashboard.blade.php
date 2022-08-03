@@ -85,8 +85,23 @@
                         </div>
                         <div class="form-group">
                             <label>Gambar</label>
-                            <input type="file" name="image" class="form-control" accept="image/*">
+                            <input type="file" name="image" class="form-control" required accept="image/*">
                         </div>
+                        <div class="text-center">
+                            <h1>SURVEY KUNJUNGAN</h1>
+                        </div>
+                        @foreach ($surveyQuestions as $key => $surveyQuestion)
+                            <div class="form-group">
+                                <label>{{ $surveyQuestion->question }}</label> <br>
+                                <input type="text" value="{{$surveyQuestion->id}}" name="survey[{{$key}}][id]" id="" hidden>
+                                <select class="form-control" name="survey[{{$key}}][value]">
+                                    <option value="">Pilih Nilai</option>
+                                    @for ($i = 0; $i <= 10; $i++)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        @endforeach
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full px-3 text-right">
                                 <button type="submit"

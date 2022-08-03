@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SurveyAnswer;
 use App\Models\User;
 use App\Models\UserNeed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserNeedController extends Controller
 {
@@ -129,18 +131,36 @@ class UserNeedController extends Controller
             'guide_name' => 'required',
             'name' => 'required',
             'image' => 'required|image',
+            'survey.*.value' => 'required',
+            'survey.*.id' => 'required',
         ]);
-        $data['user_id'] = Auth::user()->id;
 
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $name = $file->getClientOriginalName();
-            $file_name = date('mdYHis') . '-' . $name;
-            $image = $file->storeAs('image', $file_name, 'public_uploads');
-            $data['image'] = $image;
-        };
+        DB::beginTransaction();
+        try {
+            $data['user_id'] = Auth::user()->id;
 
-        UserNeed::create($data);
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $name = $file->getClientOriginalName();
+                $file_name = date('mdYHis') . '-' . $name;
+                $image = $file->storeAs('image', $file_name, 'public_uploads');
+                $data['image'] = $image;
+            };
+
+            $userNeed = UserNeed::create($data);
+            foreach ($data['survey'] as $d) {
+                SurveyAnswer::create([
+                    'value' => $d['value'],
+                    'user_need_id' => $userNeed->id,
+                    'survey_question_id' => $d['id'],
+                ]);
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            return $e->getMessage();
+            DB::rollback();
+        }
         session()->flash('success');
         return back();
     }

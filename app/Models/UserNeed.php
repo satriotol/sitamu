@@ -16,7 +16,10 @@ class UserNeed extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
-
+    public function survey_answers()
+    {
+        return $this->hasMany(SurveyAnswer::class, 'user_need_id', 'id');
+    }
     public function deleteImage()
     {
         Storage::disk('public_uploads')->delete($this->attributes['image']);
