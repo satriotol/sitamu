@@ -27,7 +27,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login_post');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'register_post'])->name('register_post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout_post');
-Route::middleware(['auth'])->group(function () {
+Route::group(['middleware' => ['auth']], function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('cctv', CctvController::class);
     Route::resource('user', UserController::class);
