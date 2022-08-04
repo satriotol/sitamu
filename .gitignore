@@ -16,3 +16,5 @@ yarn-error.log
 /.vscode
 public/uploads/image/
 vendor.zip
+node_modules.zip
+public/build.zip
