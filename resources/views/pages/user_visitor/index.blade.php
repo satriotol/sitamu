@@ -35,7 +35,8 @@
                                     <td>{{ $user_need->guide_name }}</td>
                                     <td>{{ $user_need->name }}</td>
                                     <td>{{ $user_need->survey_answers->sum('value') }}</td>
-                                    <td><img src="{{ $user_need->image }}" style="height: 100px" alt=""></td>
+                                    <td><img src="{{ asset('uploads/' . $user_need->image) }}" style="height: 100px"
+                                            alt=""></td>
                                     <td><a class="inline-block border border-gray-700 bg-gray-700 text-white rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline"
                                             href="{{ route('user_need.edit', $user_need->id) }}">
                                             Edit
