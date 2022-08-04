@@ -166,7 +166,7 @@ class UserNeedController extends Controller
                 ]);
             }
             foreach ($users as $user) {
-                Mail::to($user->email)->send(new UserNeedEmail);
+                Mail::to($user->email)->send(new UserNeedEmail($userNeed));
             }
             DB::commit();
         } catch (\Exception $e) {

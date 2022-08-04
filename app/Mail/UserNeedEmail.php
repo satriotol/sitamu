@@ -16,9 +16,10 @@ class UserNeedEmail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $userNeed;
+    public function __construct($userNeed)
     {
-        //
+        $this->userNeed = $userNeed;
     }
 
     /**
@@ -28,6 +29,6 @@ class UserNeedEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('email');
+        return $this->subject('ADA PENGUNJUNG BARU')->view('email');
     }
 }
