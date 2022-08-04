@@ -24,9 +24,9 @@ class UserNeed extends Model
     {
         Storage::disk('public_uploads')->delete($this->attributes['image']);
     }
-    public function getImageAttribute()
-    {
-        $image = env('ASSET_URL') . '/uploads/' . $this->attributes['image'];
-        return $image;
-    }
+    // public function getImageAttribute()
+    // {
+    //     $image = env('ASSET_URL') . '/uploads/' . $this->attributes['image'];
+    //     return $image;
+    // }
 }
