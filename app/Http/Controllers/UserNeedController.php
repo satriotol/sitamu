@@ -139,9 +139,7 @@ class UserNeedController extends Controller
         $users = User::whereHas('roles', function ($q) {
             $q->where('name', '!=', 'VISITOR');
         })->get();
-        foreach ($users as $user) {
-            Mail::to($user->email)->send(new UserNeedEmail);
-        }
+
         DB::beginTransaction();
         try {
             $data['user_id'] = Auth::user()->id;
@@ -154,7 +152,12 @@ class UserNeedController extends Controller
                 $data['image'] = $image;
             };
 
-            $userNeed = UserNeed::create($data);
+            $userNeed = UserNeed::create([
+                'user_id' => Auth::user()->id,
+                'guide_name' => $data['guide_name'],
+                'image' => $data['image'],
+                'name' => $data['guide_name'],
+            ]);
             foreach ($data['survey'] as $d) {
                 SurveyAnswer::create([
                     'value' => $d['value'],
@@ -162,7 +165,9 @@ class UserNeedController extends Controller
                     'survey_question_id' => $d['id'],
                 ]);
             }
-
+            foreach ($users as $user) {
+                Mail::to($user->email)->send(new UserNeedEmail);
+            }
             DB::commit();
         } catch (\Exception $e) {
             return $e->getMessage();
