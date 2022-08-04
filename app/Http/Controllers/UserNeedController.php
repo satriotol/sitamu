@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UserNeedEmail;
 use App\Models\SurveyAnswer;
 use App\Models\User;
 use App\Models\UserNeed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class UserNeedController extends Controller
 {
@@ -134,7 +136,12 @@ class UserNeedController extends Controller
             'survey.*.value' => 'required',
             'survey.*.id' => 'required',
         ]);
-
+        $users = User::whereHas('roles', function ($q) {
+            $q->where('name', '!=', 'VISITOR');
+        })->get();
+        foreach ($users as $user) {
+            Mail::to($user->email)->send(new UserNeedEmail);
+        }
         DB::beginTransaction();
         try {
             $data['user_id'] = Auth::user()->id;
