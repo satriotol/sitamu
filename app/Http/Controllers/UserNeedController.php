@@ -156,7 +156,7 @@ class UserNeedController extends Controller
                 'user_id' => Auth::user()->id,
                 'guide_name' => $data['guide_name'],
                 'image' => $data['image'],
-                'name' => $data['guide_name'],
+                'name' => $data['name'],
             ]);
             foreach ($data['survey'] as $d) {
                 SurveyAnswer::create([
