@@ -47,7 +47,7 @@ class AuthController extends Controller
             ],'Authentication Failed', 500);
         }
     }
-    public function register_post(Request $request)
+    public function register(Request $request)
     {
         $data = $request->validate([
             'name' => 'required',
