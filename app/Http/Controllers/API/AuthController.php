@@ -71,6 +71,7 @@ class AuthController extends Controller
             $user->assignRole($role->id);
         } catch (\Exception $e) {
             return ResponseFormatter::error([
+                'message' => 'Something went wrong',
                 'error' => $e
             ]);
         }
