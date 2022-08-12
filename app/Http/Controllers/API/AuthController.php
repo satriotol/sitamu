@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Api\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserDetail;
@@ -73,6 +74,9 @@ class AuthController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
+            return ResponseFormatter::error([
+                'error' => $e
+            ]);
         }
         return ResponseFormatter::success([
             'user' => $user
