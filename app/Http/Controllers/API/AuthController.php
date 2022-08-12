@@ -56,7 +56,6 @@ class AuthController extends Controller
             'phone' => 'required',
             'instansi' => 'required',
         ]);
-        DB::beginTransaction();
         try {
             $user = User::create([
                 'name' => $data['name'],
@@ -70,9 +69,7 @@ class AuthController extends Controller
             ]);
             $role = Role::where('name', 'VISITOR')->first();
             $user->assignRole($role->id);
-            DB::commit();
         } catch (\Exception $e) {
-            DB::rollback();
             return ResponseFormatter::error([
                 'error' => $e
             ]);
