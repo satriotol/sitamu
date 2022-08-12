@@ -49,14 +49,14 @@ class AuthController extends Controller
     }
     public function register(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required',
-            'phone' => 'required',
-            'instansi' => 'required',
-        ]);
         try {
+            $data = $request->validate([
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required',
+                'phone' => 'required',
+                'instansi' => 'required',
+            ]);
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
