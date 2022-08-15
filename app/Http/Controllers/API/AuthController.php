@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Api\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserDetail;
@@ -14,6 +15,11 @@ use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
+    public function user(Request $request)
+    {
+        $user = Auth::user();
+        return ResponseFormatter::success($user, 'Success');    
+    }
     public function login(Request $request)
     {
         try {
@@ -71,7 +77,6 @@ class AuthController extends Controller
             $user->assignRole($role->id);
         } catch (\Exception $e) {
             return ResponseFormatter::error([
-                'message' => 'Something went wrong',
                 'error' => $e
             ]);
         }
