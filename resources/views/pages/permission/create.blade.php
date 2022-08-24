@@ -24,12 +24,14 @@
                         <tr>
                             <td><input type="text" name="name[]" placeholder="Name" required class="form-control" />
                             </td>
-                            <td><button type="button" name="add" id="add-btn" class="btn btn-success" style="background-color: green">Add
+                            <td><button type="button" name="add" id="add-btn" class="btn btn-success"
+                                    style="background-color: green">Add
                                     More</button></td>
                         </tr>
                     </table>
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3 text-right">
+                            <a href="{{ URL::previous() }}" class="btn btn-warning">Batal</a>
                             <button type="submit"
                                 class="shadow-lg bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                                 Save

@@ -27,8 +27,8 @@
                         <label>
                             Email
                         </label>
-                        <input value="{{ isset($user_detail) ? $user_detail->user->email : old('email') }}" name="email"
-                            required class="form-control" type="email" placeholder="Email">
+                        <input value="{{ isset($user_detail) ? $user_detail->user->email : old('email') }}"
+                            name="email" required class="form-control" type="email" placeholder="Email">
                     </div>
                     <div class="form-group">
                         <label>
@@ -47,11 +47,12 @@
                         <label>
                             Instansi
                         </label>
-                        <input value="{{ isset($user_detail) ? $user_detail->instansi : old('instansi') }}" name="instansi"
-                            required class="form-control" type="text" placeholder="Instansi">
+                        <input value="{{ isset($user_detail) ? $user_detail->instansi : old('instansi') }}"
+                            name="instansi" required class="form-control" type="text" placeholder="Instansi">
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full px-3 text-right">
+                            <a href="{{ URL::previous() }}" class="btn btn-warning">Batal</a>
                             <button type="submit"
                                 class=" shadow-lg bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                                 Save Tamu

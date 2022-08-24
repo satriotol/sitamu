@@ -10,4 +10,9 @@ class SurveyQuestion extends Model
     use HasFactory;
 
     protected $fillable = ['question'];
+
+    public function survey_answers()
+    {
+        return $this->hasMany(SurveyAnswer::class, 'survey_question_id', 'id');
+    }
 }

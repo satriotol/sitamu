@@ -19,6 +19,7 @@
                         <thead>
                             <tr>
                                 <th>Pertanyaan</th>
+                                <th>Nilai/Orang</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -26,9 +27,11 @@
                             @foreach ($surveyQuestions as $surveyQuestion)
                                 <tr>
                                     <td>{{ $surveyQuestion->question }}</td>
+                                    <td>{{ $surveyQuestion->survey_answers->count }}</td>
                                     <td>
                                         <form class="inline-block"
-                                            action='{{ route('surveyQuestion.destroy', $surveyQuestion->id) }}' method="POST">
+                                            action='{{ route('surveyQuestion.destroy', $surveyQuestion->id) }}'
+                                            method="POST">
                                             @method('delete')
                                             @csrf
                                             <button onclick="return confirm('Are you sure?')"

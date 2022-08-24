@@ -23,7 +23,8 @@ class DashboardController extends Controller
         for ($i = 0; $i < 31; $i++) {
             $params[] = $i + 1;
         }
-
+        
+        // $period = CarbonPeriod::create(Carbon::now()->startOfMonth()->format('Y-m-d'), Carbon::now()->endOfMonth()->format('Y-m-d'));
         $period = CarbonPeriod::create(Carbon::now()->startOfMonth()->format('Y-m-d'), Carbon::now()->endOfMonth()->format('Y-m-d'));
         $dates = $period->count();
         $thisMonth  = Carbon::now()->startOfMonth()->format('F Y');
