@@ -63,6 +63,7 @@
                             </div>
                         </div>
                     </div>
+                    <canvas id="myChart"></canvas>
                 @endcan
                 @can('dashboard_visitor')
                     @include('partials.errors')
@@ -93,8 +94,9 @@
                         @foreach ($surveyQuestions as $key => $surveyQuestion)
                             <div class="form-group">
                                 <label>{{ $surveyQuestion->question }}</label> <br>
-                                <input type="text" value="{{$surveyQuestion->id}}" name="survey[{{$key}}][id]" id="" hidden>
-                                <select class="form-control" name="survey[{{$key}}][value]">
+                                <input type="text" value="{{ $surveyQuestion->id }}"
+                                    name="survey[{{ $key }}][id]" id="" hidden>
+                                <select class="form-control" name="survey[{{ $key }}][value]">
                                     <option value="">Pilih Nilai</option>
                                     @for ($i = 0; $i <= 10; $i++)
                                         <option value="{{ $i }}">{{ $i }}</option>
@@ -117,5 +119,39 @@
     </div>
 
     @push('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            const labels = [
+                @foreach ($data_week['params'] as $key => $params)
+                    '{{ $params }}',
+                @endforeach
+            ];
+
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'My First dataset',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: [
+                        @foreach ($data_week['data'] as $key => $data)
+                            {{ $data }}
+                        @endforeach
+                    ],
+                }]
+            };
+
+            const config = {
+                type: 'line',
+                data: data,
+                options: {}
+            };
+        </script>
+        <script>
+            const myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+            );
+        </script>
     @endpush
 </x-app-layout>
