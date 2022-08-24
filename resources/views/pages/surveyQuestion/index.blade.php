@@ -27,7 +27,8 @@
                             @foreach ($surveyQuestions as $surveyQuestion)
                                 <tr>
                                     <td>{{ $surveyQuestion->question }}</td>
-                                    <td>{{ $surveyQuestion->survey_answers->count }}</td>
+                                    <td>{{ $surveyQuestion->survey_answers->sum('value') }} /
+                                        {{ $surveyQuestion->survey_answers->count() }} Orang</td>
                                     <td>
                                         <form class="inline-block"
                                             action='{{ route('surveyQuestion.destroy', $surveyQuestion->id) }}'
