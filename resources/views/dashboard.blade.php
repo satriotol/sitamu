@@ -63,7 +63,7 @@
                             </div>
                         </div>
                     </div>
-                    <canvas id="myChart"></canvas>
+                    <canvas id="myChart" class="mt-3"></canvas>
                 @endcan
                 @can('dashboard_visitor')
                     @include('partials.errors')
@@ -130,12 +130,12 @@
             const data = {
                 labels: labels,
                 datasets: [{
-                    label: 'My First dataset',
+                    label: '{{ $data_week['thisMonth'] }}',
                     backgroundColor: 'rgb(255, 99, 132)',
                     borderColor: 'rgb(255, 99, 132)',
                     data: [
                         @foreach ($data_week['data'] as $key => $data)
-                            {{ $data }}
+                            '{{ $data }}',
                         @endforeach
                     ],
                 }]
