@@ -77,7 +77,7 @@ class AuthController extends Controller
         } catch (\Exception $e) {
             return ResponseFormatter::error([
                 'error' => $e
-            ],'Terjadi Kelasahan Pastikan Form Anda Sudah Benar');
+            ],'Terjadi Kelasahan Pastikan Form Anda Sudah Benar',499.9);
         }
         return ResponseFormatter::success([
             'user' => $user
