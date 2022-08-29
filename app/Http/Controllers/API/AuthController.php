@@ -17,33 +17,40 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         $user = Auth::user();
-        return ResponseFormatter::success($user, 'Success');
+        return ResponseFormatter::success($user, 'Success');    
     }
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'email|required',
-            'password' => 'required'
-        ]);
+        try {
+            $request->validate([
+                'email' => 'email|required',
+                'password' => 'required'
+            ]);
 
-        $credentials = request(['email', 'password']);
-        if (!Auth::attempt($credentials)) {
+            $credentials = request(['email', 'password']);
+            if (!Auth::attempt($credentials)) {
+                return ResponseFormatter::error([
+                    'message' => 'Unauthorized'
+                ],'Pastikan Form Anda Sudah Lengkap Dan', 500);
+            }
+
+            $user = User::where('email', $request->email)->first();
+            if ( ! Hash::check($request->password, $user->password, [])) {
+                throw new \Exception('Invalid Credentials');
+            }
+
+            $tokenResult = $user->createToken('authToken')->plainTextToken;
+            return ResponseFormatter::success([
+                'access_token' => $tokenResult,
+                'token_type' => 'Bearer',
+                'user' => $user
+            ],'Authenticated');
+        } catch (Exception $error) {
             return ResponseFormatter::error([
-                'message' => 'Unauthorized'
-            ], 'Pastikan Kombinasi Email Dan Password Anda Benar', 500);
+                'message' => 'Something went wrong',
+                'error' => $error,
+            ],'Terjadi Kesalahan', 500);
         }
-
-        $user = User::where('email', $request->email)->first();
-        if (!Hash::check($request->password, $user->password, [])) {
-            throw new \Exception('Invalid Credentials');
-        }
-
-        $tokenResult = $user->createToken('authToken')->plainTextToken;
-        return ResponseFormatter::success([
-            'access_token' => $tokenResult,
-            'token_type' => 'Bearer',
-            'user' => $user
-        ], 'Authenticated');
     }
     public function register(Request $request)
     {
@@ -70,10 +77,10 @@ class AuthController extends Controller
         } catch (\Exception $e) {
             return ResponseFormatter::error([
                 'error' => $e
-            ], 'Terjadi Kelasahan Pastikan Form Anda Sudah Benar', 500);
+            ],'Terjadi Kelasahan Pastikan Form Anda Sudah Benar',500);
         }
         return ResponseFormatter::success([
             'user' => $user
-        ], 'Authenticated');
+        ],'Authenticated');
     }
 }
