@@ -31,6 +31,7 @@ class User extends Authenticatable
         'password',
     ];
 
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -59,10 +60,19 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        'total_visit'
     ];
 
     public function user_detail()
     {
         return $this->hasOne(UserDetail::class, 'user_id', 'id');
+    }
+    public function user_needs()
+    {
+        return $this->hasMany(UserNeed::class, 'user_id', 'id');
+    }
+    public function getTotalVisitAttribute()
+    {
+        return $this->user_needs()->count();
     }
 }
