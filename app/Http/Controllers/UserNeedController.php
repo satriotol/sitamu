@@ -165,9 +165,9 @@ class UserNeedController extends Controller
                     'survey_question_id' => $d['id'],
                 ]);
             }
-            foreach ($users as $user) {
-                Mail::to($user->email)->send(new UserNeedEmail($userNeed));
-            }
+            // foreach ($users as $user) {
+            //     Mail::to($user->email)->send(new UserNeedEmail($userNeed));
+            // }
             DB::commit();
         } catch (\Exception $e) {
             return $e->getMessage();
