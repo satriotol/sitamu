@@ -73,6 +73,6 @@ class User extends Authenticatable
     }
     public function getTotalVisitAttribute()
     {
-        return $this->user_needs()->count();
+        return (string)$this->user_needs()->count();
     }
 }
