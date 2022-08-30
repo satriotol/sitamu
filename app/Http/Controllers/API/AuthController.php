@@ -28,8 +28,15 @@ class AuthController extends Controller
             'email' => 'required|unique:users,email,' . $user->id,
             'password' => 'nullable'
         ]);
-        $user->update($data);
-        return ResponseFormatter::success($user, 'Berhasil Update User');
+        try {
+            $user->update($data);
+            return ResponseFormatter::success($user, 'Berhasil Update User');
+        } catch (\Throwable $th) {
+            return ResponseFormatter::error([
+                'message' => 'Something went wrong',
+                'error' => $th,
+            ], 'Terjadi Kesalahan', 500);
+        }
     }
     public function login(Request $request)
     {
