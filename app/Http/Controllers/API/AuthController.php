@@ -24,7 +24,8 @@ class AuthController extends Controller
         $user = User::where('id', Auth::user()->id)->first();
         $data = $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:users,email,' . $user->id
+            'email' => 'required|unique:users,email,' . $user->id,
+            'password' => 'nullable'
         ]);
         $user->update($data);
         return $user;
