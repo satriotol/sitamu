@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Api\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserDetail;
@@ -28,7 +29,7 @@ class AuthController extends Controller
             'password' => 'nullable'
         ]);
         $user->update($data);
-        return $user;
+        return ResponseFormatter::success($user, 'Berhasil Update User');
     }
     public function login(Request $request)
     {
