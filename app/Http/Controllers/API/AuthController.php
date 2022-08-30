@@ -22,13 +22,13 @@ class AuthController extends Controller
     }
     public function user_update(Request $request)
     {
-        $user = User::where('id', Auth::user()->id)->first();
-        $data = $request->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users,email,' . $user->id,
-            'password' => 'nullable'
-        ]);
         try {
+            $user = User::where('id', Auth::user()->id)->first();
+            $data = $request->validate([
+                'name' => 'required',
+                'email' => 'required|unique:users,email,' . $user->id,
+                'password' => 'nullable'
+            ]);
             $user->update($data);
             return ResponseFormatter::success($user, 'Berhasil Update User');
         } catch (\Throwable $th) {
