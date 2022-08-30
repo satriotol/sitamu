@@ -17,7 +17,17 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         $user = Auth::user();
-        return ResponseFormatter::success($user, 'Success');    
+        return ResponseFormatter::success($user, 'Success');
+    }
+    public function user_update(Request $request)
+    {
+        $user = User::where('id', Auth::user()->id)->first();
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users,email,' . $user->id
+        ]);
+        $user->update($data);
+        return $user;
     }
     public function login(Request $request)
     {
@@ -31,11 +41,11 @@ class AuthController extends Controller
             if (!Auth::attempt($credentials)) {
                 return ResponseFormatter::error([
                     'message' => 'Unauthorized'
-                ],'Pastikan Form Anda Sudah Lengkap Dan', 500);
+                ], 'Pastikan Form Anda Sudah Lengkap Dan', 500);
             }
 
             $user = User::where('email', $request->email)->first();
-            if ( ! Hash::check($request->password, $user->password, [])) {
+            if (!Hash::check($request->password, $user->password, [])) {
                 throw new \Exception('Invalid Credentials');
             }
 
@@ -44,12 +54,12 @@ class AuthController extends Controller
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
                 'user' => $user
-            ],'Authenticated');
+            ], 'Authenticated');
         } catch (Exception $error) {
             return ResponseFormatter::error([
                 'message' => 'Something went wrong',
                 'error' => $error,
-            ],'Terjadi Kesalahan', 500);
+            ], 'Terjadi Kesalahan', 500);
         }
     }
     public function register(Request $request)
@@ -77,10 +87,10 @@ class AuthController extends Controller
         } catch (\Exception $e) {
             return ResponseFormatter::error([
                 'error' => $e
-            ],'Terjadi Kelasahan Pastikan Form Anda Sudah Benar',500);
+            ], 'Terjadi Kelasahan Pastikan Form Anda Sudah Benar', 500);
         }
         return ResponseFormatter::success([
             'user' => $user
-        ],'Authenticated');
+        ], 'Authenticated');
     }
 }
