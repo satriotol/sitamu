@@ -49,13 +49,13 @@ License: For each use you must have a valid license purchased only from above li
   <script src="{{ asset('frontend/assets/js/spinner.js') }}"></script>
 
   <div class="main-wrapper" id="app">
-    @include('frontend.layout.sidebar')
+    @include('layout.sidebar')
     <div class="page-wrapper">
-      @include('frontend.layout.header')
+      @include('layout.header')
       <div class="page-content">
         @yield('content')
       </div>
-      @include('frontend.layout.footer')
+      @include('layout.footer')
     </div>
   </div>
 
