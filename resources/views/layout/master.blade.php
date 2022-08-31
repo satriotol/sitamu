@@ -9,60 +9,66 @@ Purchase: https://1.envato.market/nobleui_laravel
 License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
 -->
 <html>
+
 <head>
-  <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="Responsive Laravel Admin Dashboard Template based on Bootstrap 5">
-	<meta name="author" content="NobleUI">
-	<meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, laravel, theme, front-end, ui kit, web">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Responsive Laravel Admin Dashboard Template based on Bootstrap 5">
+    <meta name="author" content="NobleUI">
+    <meta name="keywords"
+        content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, laravel, theme, front-end, ui kit, web">
 
-  <title>NobleUI - Laravel Admin Dashboard Template</title>
+    <title>SITAMU - PEMKOT SEMARANG</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-  <!-- End fonts -->
-  
-  <!-- CSRF Token -->
-  <meta name="_token" content="{{ csrf_token() }}">
-  
-  <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- End fonts -->
 
-  <!-- plugin css -->
-  <link href="{{ asset('frontend/assets/fonts/feather-font/css/iconfont.css') }}" rel="stylesheet" />
-  <link href="{{ asset('frontend/assets/plugins/flag-icon-css/css/flag-icon.min.css') }}" rel="stylesheet" />
-  <link href="{{ asset('frontend/assets/plugins/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" />
-  <!-- end plugin css -->
+    <!-- CSRF Token -->
+    <meta name="_token" content="{{ csrf_token() }}">
 
-  @stack('plugin-styles')
+    <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
 
-  <!-- common css -->
-  <link href="{{ asset('frontend/css/app.css') }}" rel="stylesheet" />
-  <!-- end common css -->
+    <!-- plugin css -->
+    <link href="{{ asset('frontend/assets/fonts/feather-font/css/iconfont.css') }}" rel="stylesheet" />
+    <link href="{{ asset('frontend/assets/plugins/flag-icon-css/css/flag-icon.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('frontend/assets/plugins/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('frontend/assets/plugins/datatables-net-bs5/dataTables.bootstrap5.css') }}" rel="stylesheet" />
+    <!-- end plugin css -->
 
-  @stack('style')
+    @stack('plugin-styles')
+
+    <!-- common css -->
+    <link href="{{ asset('frontend/css/app.css') }}" rel="stylesheet" />
+    <!-- end common css -->
+
+    @stack('style')
 </head>
-<body data-base-url="{{url('/')}}">
 
-  <script src="{{ asset('frontend/assets/js/spinner.js') }}"></script>
+<body data-base-url="{{ url('/') }}">
 
-  <div class="main-wrapper" id="app">
-    @include('layout.sidebar')
-    <div class="page-wrapper">
-      @include('layout.header')
-      <div class="page-content">
-        @yield('content')
-      </div>
-      @include('layout.footer')
+    <script src="{{ asset('frontend/assets/js/spinner.js') }}"></script>
+
+    <div class="main-wrapper" id="app">
+        @include('layout.sidebar')
+        <div class="page-wrapper">
+            @include('layout.header')
+            <div class="page-content">
+                @yield('content')
+            </div>
+            @include('layout.footer')
+        </div>
     </div>
-  </div>
 
     <!-- base js -->
     <script src="{{ asset('frontend/js/app.js') }}"></script>
     <script src="{{ asset('frontend/assets/plugins/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('frontend/assets/plugins/datatables-net-bs5/dataTables.bootstrap5.js') }}"></script>
     <!-- end base js -->
 
     <!-- plugin js -->
@@ -74,5 +80,8 @@ License: For each use you must have a valid license purchased only from above li
     <!-- end common js -->
 
     @stack('custom-scripts')
+    <script src="{{ asset('frontend/assets/js/data-table.js') }}"></script>
+    <script src="{{ asset('frontend/assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 </body>
+
 </html>

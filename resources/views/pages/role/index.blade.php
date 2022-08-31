@@ -1,4 +1,4 @@
-@extends('layout.content')
+@extends('layout.master')
 @section('content')
     <x-app-layout>
         <div class="py-12">
@@ -10,8 +10,8 @@
                     </a>
                 </div>
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <div class="px-4 py-5">
-                        <table id="example" class="display" style="width:100%">
+                    <div class="px-4 py-5 table-responsive">
+                        <table id="dataTableExample" class="table" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Nama</th>
