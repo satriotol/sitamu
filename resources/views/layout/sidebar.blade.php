@@ -26,6 +26,54 @@
                     </a>
                 </li>
             @endcan
+            @can('daftar_tamu')
+                <li class="nav-item {{ active_class(['user_detail.*']) }}">
+                    <a href="{{ route('user_detail.index') }}" class="nav-link">
+                        <i class="link-icon" data-feather="box"></i>
+                        <span class="link-title">Daftar Tamu</span>
+                    </a>
+                </li>
+            @endcan
+            @can('daftar_admin')
+                <li class="nav-item {{ active_class(['user.*']) }}">
+                    <a href="{{ route('user.index') }}" class="nav-link">
+                        <i class="link-icon" data-feather="box"></i>
+                        <span class="link-title">Daftar Admin</span>
+                    </a>
+                </li>
+            @endcan
+            @can('daftar_cctv')
+                <li class="nav-item {{ active_class(['cctv.*']) }}">
+                    <a href="{{ route('cctv.index') }}" class="nav-link">
+                        <i class="link-icon" data-feather="box"></i>
+                        <span class="link-title">Daftar CCTV</span>
+                    </a>
+                </li>
+            @endcan
+            @can('daftar_cctv')
+                <li class="nav-item {{ active_class(['surveyQuestion.*']) }}">
+                    <a href="{{ route('surveyQuestion.index') }}" class="nav-link">
+                        <i class="link-icon" data-feather="box"></i>
+                        <span class="link-title">Daftar Survey</span>
+                    </a>
+                </li>
+            @endcan
+            @can('daftar_role')
+                <li class="nav-item {{ active_class(['role.*']) }}">
+                    <a href="{{ route('role.index') }}" class="nav-link">
+                        <i class="link-icon" data-feather="box"></i>
+                        <span class="link-title">Daftar Role</span>
+                    </a>
+                </li>
+            @endcan
+            @can('daftar_permission')
+                <li class="nav-item {{ active_class(['permission.*']) }}">
+                    <a href="{{ route('permission.index') }}" class="nav-link">
+                        <i class="link-icon" data-feather="box"></i>
+                        <span class="link-title">Daftar Permission</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </nav>
