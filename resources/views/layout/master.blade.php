@@ -46,6 +46,12 @@ License: For each use you must have a valid license purchased only from above li
     <!-- end common css -->
 
     @stack('style')
+    <style>
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: transparent !important;
+            border: 0;
+        }
+    </style>
 </head>
 
 <body data-base-url="{{ url('/') }}">
