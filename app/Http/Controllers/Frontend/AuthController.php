@@ -15,7 +15,7 @@ class AuthController extends Controller
 {
     public function index()
     {
-        return view('frontend.pages.auth.login');
+        return view('pages.auth.login');
     }
     public function login(Request $request)
     {
@@ -33,7 +33,7 @@ class AuthController extends Controller
     }
     public function register()
     {
-        return view('frontend.pages.auth.register');
+        return view('pages.auth.register');
     }
     public function register_post(Request $request)
     {
@@ -74,6 +74,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect(route('frontend.login'));
+        return redirect(route('login'));
     }
 }
