@@ -41,7 +41,7 @@ class CctvController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'url' => 'required|url',
+            'url' => 'required',
         ]);
 
         Cctv::create($data);
@@ -81,7 +81,7 @@ class CctvController extends Controller
     public function update(Request $request, Cctv $cctv)
     {
         $data = $request->validate([
-            'url' => 'required|url',
+            'url' => 'required',
         ]);
 
         $cctv->update($data);
