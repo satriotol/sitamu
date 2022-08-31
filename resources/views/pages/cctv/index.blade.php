@@ -43,6 +43,9 @@
                         </table>
                     </div>
                 </div>
+                <h3 class="mt-3">Tutorial Penggunaan</h3>
+                <iframe width="50%"
+                    src="https://docs.google.com/document/d/e/2PACX-1vQ4DLEVlEEhfIptn_CWKhI9kZ3vZ4Z1_5M1h8hv5FfwVuVOIdh9bDBHHra8eqhm6QzmX22pTj7DWeNE/pub?embedded=true"></iframe>
             </div>
         </div>
     </x-app-layout>
