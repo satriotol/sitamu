@@ -21,6 +21,13 @@
                         </div>
                         <div class="form-group">
                             <label>
+                                Phone
+                            </label>
+                            <input value="{{ isset($user) ? $user->phone : old('phone') }}" name="phone" required
+                                class="form-control" type="text" placeholder="Phone">
+                        </div>
+                        <div class="form-group">
+                            <label>
                                 Email
                             </label>
                             <input value="{{ isset($user) ? $user->email : old('email') }}" name="email" required
@@ -36,7 +43,7 @@
                         <div class="form-group">
                             <label>Role</label>
                             <select class="form-control" data-width="100%" required name="role">
-                                <option value="">Select OPD</option>
+                                <option value="">Select Role</option>
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->id }}"
                                         @isset($user) @if ($role->id === $user->roles[0]->id) selected @endif @endisset>
@@ -50,7 +57,7 @@
                                 <a href="{{ URL::previous() }}" class="btn btn-warning">Batal</a>
                                 <button type="submit"
                                     class=" shadow-lg bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                                    Save Kunjungan Tamu
+                                    Save Admin
                                 </button>
                             </div>
                         </div>

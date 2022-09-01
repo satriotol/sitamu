@@ -45,6 +45,7 @@ class UserController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
+            'phone' => 'required',
             'password' => 'required',
             'role' => 'required'
         ]);
@@ -91,18 +92,21 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'sometimes',
+            'phone' => 'required',
             'role' => 'required'
         ]);
         if ($request->password != null) {
             $user->update([
                 'name' => $data['name'],
                 'email' => $data['email'],
+                'phone' => $data['phone'],
                 'password' => Hash::make($data['password']),
             ]);
         } else {
             $user->update([
                 'name' => $data['name'],
                 'email' => $data['email'],
+                'phone' => $data['phone'],
             ]);
         }
         DB::table('model_has_roles')->where('model_id', $user->id)->delete();
