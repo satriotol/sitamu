@@ -57,7 +57,13 @@ class UserNeedController extends Controller
             $data['image'] = $image;
         };
 
-        UserNeed::create($data);
+        $user_need = UserNeed::create($data);
+        $admins = User::whereHas('roles', function ($q) {
+            $q->where('name', '!=', 'VISITOR');
+        })->get();        
+        foreach ($admins as $key => $admin) {
+            $this->kirim_wa($admin->phone, $user_need->user->name);
+        }
         session()->flash('success');
         return redirect(route('user_need.index'));
     }
@@ -108,6 +114,7 @@ class UserNeedController extends Controller
             $user_need->deleteImage();
             $data['image'] = $image;
         };
+
         $user_need->update($data);
         session()->flash('success');
         return redirect(route('user_need.index'));
@@ -175,5 +182,34 @@ class UserNeedController extends Controller
         }
         session()->flash('success');
         return back();
+    }
+    public function kirim_wa($phone_no, $nama)
+    {
+        $message = "Ada Pengunjung Baru " . $nama;
+
+        $message = preg_replace("/(\n)/", "<ENTER>", $message);
+        $message = preg_replace("/(\r)/", "<ENTER>", $message);
+
+        $phone_no = preg_replace("/(\n)/", ",", $phone_no);
+        $phone_no = preg_replace("/(\r)/", "", $phone_no);
+
+        $data = array("phone_no" => $phone_no, "key" => "e4d16a0772635a648acd790503fe71a9ebcd9f538952dfbc", "message" => $message);
+        $data_string = json_encode($data);
+        $ch = curl_init('http://116.203.92.59/api/send_message');
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_VERBOSE, 0);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+        curl_setopt(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data_string)
+            )
+        );
+        $result = curl_exec($ch);
     }
 }
