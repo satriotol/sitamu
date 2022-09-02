@@ -23,7 +23,7 @@ class UserVisitorController extends Controller
             'user_id' => 'nullable',
             'guide_name' => 'required',
             'name' => 'required',
-            'image' => 'nullable|image',
+            'image' => 'nullable',
             'survey.*.value' => 'required',
             'survey.*.id' => 'required',
         ]);
