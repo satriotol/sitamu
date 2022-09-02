@@ -52,7 +52,7 @@ class UserVisitorController extends Controller
                     'survey_question_id' => $d['id'],
                 ]);
             }
-            return ResponseFormatter::success('', 'Sukses Menambahkan Kunjungan');
+            return ResponseFormatter::success('Sukses Menambahkan Kunjungan', 'Sukses Menambahkan Kunjungan');
             // foreach ($users as $user) {
             //     Mail::to($user->email)->send(new UserNeedEmail($userNeed));
             // }
