@@ -33,9 +33,17 @@
                                         <td><img src="{{ asset('uploads/' . $user_need->image) }}" alt=""></td>
                                         <td>
                                             @if ($user_need->admin_id)
-                                                <span class="badge bg-success">Sudah Di Acc</span>
+                                                <span class="badge bg-success">{{$user_need->admin->name}}</span>
                                             @else
-                                                <span class="badge bg-danger">Belum Di Acc</span>
+                                                <form class="inline-block"
+                                                    action='{{ route('user_need.changeStatus', $user_need->id) }}'
+                                                    method="POST">
+                                                    @csrf
+                                                    <button onclick="return confirm('Apakah Anda Yakin?')"
+                                                        class="badge bg-danger">Belum Di
+                                                        Acc</button>
+
+                                                </form>
                                             @endif
                                         </td>
                                         <td><a class="inline-block border border-gray-700 bg-gray-700 text-white rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline"

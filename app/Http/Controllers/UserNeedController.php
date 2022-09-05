@@ -177,4 +177,12 @@ class UserNeedController extends Controller
         session()->flash('success');
         return back();
     }
+    public function changeStatus(UserNeed $user_need)
+    {
+        $user_need->update([
+            'admin_id' => Auth::user()->id,
+        ]);
+        session()->flash('success');
+        return back();
+    }
 }
