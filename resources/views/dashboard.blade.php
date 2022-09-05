@@ -74,13 +74,6 @@
                                     placeholder="Keperluan">
                             </div>
                             <div class="form-group">
-                                <label>
-                                    Nama Pendamping
-                                </label>
-                                <input value="{{ old('guide_name') }}" name="guide_name" required class="form-control"
-                                    type="text" placeholder="Nama Pendamping">
-                            </div>
-                            <div class="form-group">
                                 <label>Upload Foto Selfie</label>
                                 <input type="file" name="image" class="form-control" required accept="image/*">
                             </div>

@@ -53,7 +53,6 @@ class UserNeedController extends Controller
     {
         $data = $request->validate([
             'user_id' => 'required',
-            'guide_name' => 'required',
             'name' => 'required',
             'image' => 'required|image',
         ]);
@@ -110,7 +109,6 @@ class UserNeedController extends Controller
     {
         $data = $request->validate([
             'user_id' => 'required',
-            'guide_name' => 'required',
             'name' => 'required',
             'image' => 'nullable|image',
         ]);
@@ -145,7 +143,6 @@ class UserNeedController extends Controller
     {
         $data = $request->validate([
             'user_id' => 'nullable',
-            'guide_name' => 'required',
             'name' => 'required',
             'image' => 'required|image',
             'survey.*.value' => 'required',

@@ -32,14 +32,6 @@
                                 class="form-control" type="text" placeholder="Keperluan">
                         </div>
                         <div class="form-group">
-                            <label>
-                                Nama Pendamping
-                            </label>
-                            <input value="{{ isset($user_need) ? $user_need->guide_name : old('guide_name') }}"
-                                name="guide_name" required class="form-control" type="text"
-                                placeholder="Nama Pendamping">
-                        </div>
-                        <div class="form-group">
                             <label>Gambar</label>
                             <input type="file" name="image" class="form-control" accept="image/*">
                         </div>
