@@ -85,9 +85,9 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{ asset('frontend/assets/js/template.js') }}"></script>
     <!-- end common js -->
 
-    @stack('custom-scripts')
     <script src="{{ asset('frontend/assets/js/data-table.js') }}"></script>
     <script src="{{ asset('frontend/assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    @stack('custom-scripts')
 </body>
 
 </html>
