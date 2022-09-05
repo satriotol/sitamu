@@ -143,6 +143,7 @@ class UserDetailController extends Controller
     {
         $user_detail->delete();
         $user_detail->user->delete();
+        $user_detail->user->user_needs()->delete();
         session()->flash('success');
         return redirect(route('user_detail.index'));
     }

@@ -18,8 +18,8 @@
                                     <th>Pengunjung</th>
                                     <th>Pendamping</th>
                                     <th>Keperluan</th>
-                                    <th>Total Nilai</th>
                                     <th>Bukti</th>
+                                    <th>Acc By</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -30,9 +30,14 @@
                                         <td>{{ $user_need->user->name ?? '' }}</td>
                                         <td>{{ $user_need->guide_name }}</td>
                                         <td>{{ $user_need->name }}</td>
-                                        <td>{{ $user_need->survey_answers->sum('value') }}</td>
-                                        <td><img src="{{ asset('uploads/' . $user_need->image) }}" style="height: 100px"
-                                                alt=""></td>
+                                        <td><img src="{{ asset('uploads/' . $user_need->image) }}" alt=""></td>
+                                        <td>
+                                            @if ($user_need->admin_id)
+                                                <span class="badge bg-success">Sudah Di Acc</span>
+                                            @else
+                                                <span class="badge bg-danger">Belum Di Acc</span>
+                                            @endif
+                                        </td>
                                         <td><a class="inline-block border border-gray-700 bg-gray-700 text-white rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline"
                                                 href="{{ route('user_need.edit', $user_need->id) }}">
                                                 Edit
