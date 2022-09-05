@@ -17,6 +17,13 @@ class UserDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('permission:tamu-list|tamu-create|tamu-edit|tamu-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:tamu-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:tamu-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:tamu-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $user_details = UserDetail::all();

@@ -26,7 +26,7 @@
                     </a>
                 </li>
             @endcan
-            @can('daftar_tamu')
+            @can('tamu-list')
                 <li class="nav-item {{ active_class(['user_detail.*']) }}">
                     <a href="{{ route('user_detail.index') }}" class="nav-link">
                         <i class="link-icon" data-feather="box"></i>
@@ -50,7 +50,7 @@
                     </a>
                 </li>
             @endcan
-            @can('daftar_cctv')
+            @can('daftar_survey')
                 <li class="nav-item {{ active_class(['surveyQuestion.*']) }}">
                     <a href="{{ route('surveyQuestion.index') }}" class="nav-link">
                         <i class="link-icon" data-feather="box"></i>
