@@ -19,6 +19,13 @@ class UserNeedController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('permission:kunjunganTamu-list|kunjunganTamu-create|kunjunganTamu-edit|kunjunganTamu-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:kunjunganTamu-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:kunjunganTamu-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:kunjunganTamu-delete', ['only' => ['destroy']]);
+    }
     public function index()
     {
         $user_needs = UserNeed::all();

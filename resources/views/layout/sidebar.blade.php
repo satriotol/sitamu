@@ -18,7 +18,7 @@
                     <span class="link-title">Dashboard</span>
                 </a>
             </li>
-            @can('kunjungan_tamu')
+            @can('kunjunganTamu-list')
                 <li class="nav-item {{ active_class(['user_need.*']) }}">
                     <a href="{{ route('user_need.index') }}" class="nav-link">
                         <i class="link-icon" data-feather="box"></i>
