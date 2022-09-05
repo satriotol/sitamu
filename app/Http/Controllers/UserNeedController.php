@@ -145,8 +145,6 @@ class UserNeedController extends Controller
             'user_id' => 'nullable',
             'name' => 'required',
             'image' => 'required|image',
-            'survey.*.value' => 'required',
-            'survey.*.id' => 'required',
         ]);
 
         DB::beginTransaction();
@@ -163,7 +161,6 @@ class UserNeedController extends Controller
 
             $userNeed = UserNeed::create([
                 'user_id' => Auth::user()->id,
-                'guide_name' => $data['guide_name'],
                 'image' => $data['image'],
                 'name' => $data['name'],
             ]);
