@@ -16,7 +16,6 @@
                                 <tr>
                                     <th>Tanggal</th>
                                     <th>Pengunjung</th>
-                                    <th>Pendamping</th>
                                     <th>Keperluan</th>
                                     <th>Bukti</th>
                                     <th>Acc By</th>
@@ -28,7 +27,6 @@
                                     <tr>
                                         <td>{{ $user_need->created_at }}</td>
                                         <td>{{ $user_need->user->name ?? '' }}</td>
-                                        <td>{{ $user_need->guide_name }}</td>
                                         <td>{{ $user_need->name }}</td>
                                         <td><img src="{{ asset('uploads/' . $user_need->image) }}" alt=""></td>
                                         <td>
