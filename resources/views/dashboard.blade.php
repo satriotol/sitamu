@@ -81,7 +81,7 @@
                                     type="text" placeholder="Nama Pendamping">
                             </div>
                             <div class="form-group">
-                                <label>Gambar</label>
+                                <label>Upload Foto Selfie</label>
                                 <input type="file" name="image" class="form-control" required accept="image/*">
                             </div>
                             <div class="flex flex-wrap -mx-3 mb-6">
