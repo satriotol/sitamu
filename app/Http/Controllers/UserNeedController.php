@@ -163,13 +163,6 @@ class UserNeedController extends Controller
                 'image' => $data['image'],
                 'name' => $data['name'],
             ]);
-            foreach ($data['survey'] as $d) {
-                SurveyAnswer::create([
-                    'value' => $d['value'],
-                    'user_need_id' => $userNeed->id,
-                    'survey_question_id' => $d['id'],
-                ]);
-            }
             $admins = User::whereHas('roles', function ($q) {
                 $q->where('name', '!=', 'VISITOR');
             })->get();
