@@ -24,26 +24,21 @@ class UserVisitorController extends Controller
             'name' => 'required',
             'image' => 'required|image',
         ]);
-        try {
-            $data['user_id'] = Auth::user()->id;
+        $data['user_id'] = Auth::user()->id;
 
-            if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                $name = $file->getClientOriginalName();
-                $file_name = date('mdYHis') . '-' . $name;
-                $image = $file->storeAs('image', $file_name, 'public_uploads');
-                $data['image'] = $image;
-            };
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $name = $file->getClientOriginalName();
+            $file_name = date('mdYHis') . '-' . $name;
+            $image = $file->storeAs('image', $file_name, 'public_uploads');
+            $data['image'] = $image;
+        };
 
-            $userNeed = UserNeed::create([
-                'user_id' => Auth::user()->id,
-                'image' => $data['image'],
-                'name' => $data['name'],
-            ]);
-            return ResponseFormatter::success($userNeed, 'Sukses Menambahkan Kunjungan');
-        } catch (\Exception $e) {
-            return $e->getMessage();
-            DB::rollback();
-        }
+        $userNeed = UserNeed::create([
+            'user_id' => Auth::user()->id,
+            'image' => $data['image'],
+            'name' => $data['name'],
+        ]);
+        return ResponseFormatter::success($userNeed, 'Sukses Menambahkan Kunjungan');
     }
 }
