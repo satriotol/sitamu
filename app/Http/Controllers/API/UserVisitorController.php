@@ -22,7 +22,7 @@ class UserVisitorController extends Controller
         $data = $request->validate([
             'user_id' => 'nullable',
             'name' => 'required',
-            'image' => 'required|image',
+            'image' => 'required',
         ]);
         $data['user_id'] = Auth::user()->id;
 
