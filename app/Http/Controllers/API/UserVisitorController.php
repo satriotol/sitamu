@@ -22,9 +22,8 @@ class UserVisitorController extends Controller
         $data = $request->validate([
             'user_id' => 'nullable',
             'name' => 'required',
-            'image' => 'nullable',
+            'image' => 'required|image',
         ]);
-        DB::beginTransaction();
         try {
             $data['user_id'] = Auth::user()->id;
 
@@ -42,10 +41,6 @@ class UserVisitorController extends Controller
                 'name' => $data['name'],
             ]);
             return ResponseFormatter::success($userNeed, 'Sukses Menambahkan Kunjungan');
-            // foreach ($users as $user) {
-            //     Mail::to($user->email)->send(new UserNeedEmail($userNeed));
-            // }
-            DB::commit();
         } catch (\Exception $e) {
             return $e->getMessage();
             DB::rollback();
