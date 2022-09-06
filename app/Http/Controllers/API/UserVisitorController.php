@@ -21,11 +21,8 @@ class UserVisitorController extends Controller
     {
         $data = $request->validate([
             'user_id' => 'nullable',
-            'guide_name' => 'required',
             'name' => 'required',
             'image' => 'nullable',
-            'survey.*.value' => 'required',
-            'survey.*.id' => 'required',
         ]);
         DB::beginTransaction();
         try {
@@ -41,18 +38,10 @@ class UserVisitorController extends Controller
 
             $userNeed = UserNeed::create([
                 'user_id' => Auth::user()->id,
-                'guide_name' => $data['guide_name'],
                 'image' => $data['image'],
                 'name' => $data['name'],
             ]);
-            foreach ($data['survey'] as $d) {
-                SurveyAnswer::create([
-                    'value' => $d['value'],
-                    'user_need_id' => $userNeed->id,
-                    'survey_question_id' => $d['id'],
-                ]);
-            }
-            return ResponseFormatter::success('Sukses Menambahkan Kunjungan', 'Sukses Menambahkan Kunjungan');
+            return ResponseFormatter::success($userNeed, 'Sukses Menambahkan Kunjungan');
             // foreach ($users as $user) {
             //     Mail::to($user->email)->send(new UserNeedEmail($userNeed));
             // }
