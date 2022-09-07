@@ -7,8 +7,7 @@
                 <div class="card">
                     <div class="row">
                         <div class="col-md-4 pe-md-0">
-                            <div class="auth-side-wrapper"
-                                style="background-image: url({{ asset('/1.png') }})">
+                            <div class="auth-side-wrapper" style="background-image: url({{ asset('/1.png') }})">
 
                             </div>
                         </div>
@@ -19,6 +18,12 @@
                                 @foreach ($errors->all() as $key => $error)
                                     <li>{{ $error }}</li>
                                 @endforeach
+                                @if (session()->has('success'))
+                                    <div class="alert alert-success">
+                                        Yth. Pengunjung. Anda telah berhasil registrasi di SITAMU. Anda sudah dapat login
+                                        menggunakan email dan password yang telah didaftarkan sebelumnya.
+                                    </div>
+                                @endif
                                 <form class="forms-sample" method="POST" action="{{ route('login_post') }}">
                                     @csrf
                                     <div class="mb-3">
