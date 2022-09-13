@@ -11,6 +11,7 @@ class UserNeed extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id', 'image', 'name', 'admin_id'];
+    protected $appends = ['image_url'];
 
     public function user()
     {
@@ -29,9 +30,9 @@ class UserNeed extends Model
         Storage::disk('public_uploads')->delete($this->attributes['image']);
     }
 
-    // public function getImageAttribute()
-    // {
-    //     $image = env('ASSET_URL') . '/uploads/' . $this->attributes['image'];
-    //     return $image;
-    // }
+    public function getImageUrlAttribute()
+    {
+        $image = env('ASSET_URL') . '/uploads/' . $this->attributes['image'];
+        return $image;
+    }
 }

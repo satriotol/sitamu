@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Api\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\SurveyAnswer;
 use App\Models\SurveyQuestion;
@@ -16,6 +17,11 @@ class UserVisitorController extends Controller
     {
         $surveys = SurveyQuestion::all();
         return ResponseFormatter::success($surveys, 'Sukses Mendapatkan Data');
+    }
+    public function list_visitor()
+    {
+        $visitors = UserNeed::where('user_id', Auth::user()->id)->get();
+        return ResponseFormatter::success($visitors, 'Sukses Mendapatkan Data');
     }
     public function user_visitor(Request $request)
     {

@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [AuthController::class, 'user']);
     Route::post('user_update', [AuthController::class, 'user_update']);
     Route::post('user_visitor', [UserVisitorController::class, 'user_visitor']);
+    Route::get('user_visitor/list', [UserVisitorController::class, 'list_visitor']);
 });
 Route::get('getSurvey', [UserVisitorController::class, 'getSurvey']);
 Route::post('login', [AuthController::class, 'login']);
