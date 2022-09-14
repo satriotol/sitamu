@@ -14,9 +14,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $admin = User::role('ADMIN')->get()->count();
         $user = User::role('VISITOR')->get()->count();
-        $user_need = UserNeed::where('admin_id', '!=', null)->count();
+        $user_need_not_null = UserNeed::whereNotNull('admin_id')->count();
+        $user_need_null = UserNeed::whereNull('admin_id')->count();
         $cctv = Cctv::all()->count();
         $surveyQuestions = SurveyQuestion::all();
 
@@ -30,7 +30,7 @@ class DashboardController extends Controller
         $thisMonth  = Carbon::now()->startOfMonth()->format('F Y');
         for ($i = 0; $i < $dates; $i++) {
             $startOfWeek        = Carbon::now()->startOfMonth()->addDay($i);
-            $order_jawa[] = UserNeed::whereDay('created_at', '=', $startOfWeek)->get()->count();
+            $order_jawa[] = UserNeed::whereNotNull('admin_id')->whereDay('created_at', '=', $startOfWeek)->get()->count();
         }
         $order_jawa;
         $data_week = [
@@ -38,6 +38,6 @@ class DashboardController extends Controller
             'params' => $params,
             'data' => $order_jawa,
         ];
-        return view('dashboard', compact('admin', 'user', 'user_need', 'cctv', 'surveyQuestions', 'data_week'));
+        return view('dashboard', compact('user', 'cctv', 'surveyQuestions', 'data_week', 'user_need_not_null', 'user_need_null'));
     }
 }

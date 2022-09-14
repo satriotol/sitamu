@@ -10,19 +10,6 @@
                                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3 h-100">
                                     <div class="row">
                                         <div class="col-md-6 text-center">
-                                            <i class="fa-solid fa-user-gear" style="font-size: 50px;"></i>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p class="text-muted" style="font-size: 10px;">Admin</p>
-                                            <h1 style="font-size: 30px;">{{ $admin }}</h1>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3 h-100">
-                                    <div class="row">
-                                        <div class="col-md-6 text-center">
                                             <i class="fa-solid fa-user align-middle" style="font-size: 50px;"></i>
                                         </div>
                                         <div class="col-md-6">
@@ -39,8 +26,23 @@
                                             <i class="fa-solid fa-glasses" style="font-size: 50px;"></i>
                                         </div>
                                         <div class="col-md-6">
-                                            <p class="text-muted" style="font-size: 10px;">Kunjungan Tamu</p>
-                                            <h1 style="font-size: 30px;">{{ $user_need }}</h1>
+                                            <p class="text-muted" style="font-size: 10px;">Kunjungan Tamu Yang Sudah Disetujui
+                                            </p>
+                                            <h1 style="font-size: 30px;">{{ $user_need_not_null }}</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-3 h-100">
+                                    <div class="row">
+                                        <div class="col-md-6 text-center">
+                                            <i class="fa-solid fa-glasses" style="font-size: 50px;"></i>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="text-muted" style="font-size: 10px;">Kunjungan Tamu Yang Belum Disetujui
+                                            </p>
+                                            <h1 style="font-size: 30px;">{{ $user_need_null }}</h1>
                                         </div>
                                     </div>
                                 </div>
