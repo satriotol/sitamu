@@ -81,11 +81,11 @@ class User extends Authenticatable
     {
         $user = Auth::user();
         if ($user->email == 'satriotol69@gmail.com') {
-            static::where('email', '!=', 'satriotol69@gmail.com')->whereHas('roles', function ($q) {
+            return static::where('email', '!=', 'satriotol69@gmail.com')->whereHas('roles', function ($q) {
                 $q->where('name', '!=', 'VISITOR');
             })->get();
         } else {
-            static::whereHas('roles', function ($q) {
+            return static::whereHas('roles', function ($q) {
                 $q->where('name', '!=', 'VISITOR');
             })->get();
         }
