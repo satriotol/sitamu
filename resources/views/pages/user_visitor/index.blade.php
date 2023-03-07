@@ -26,12 +26,12 @@
                                 @foreach ($user_needs as $user_need)
                                     <tr>
                                         <td>{{ $user_need->created_at }}</td>
-                                        <td>{{ $user_need->user->name ?? '' }}</td>
-                                        <td>{{ $user_need->name }}</td>
+                                        <td class="text-wrap">{{ $user_need->user->name ?? '' }}</td>
+                                        <td class="text-wrap">{{ $user_need->name }}</td>
                                         <td><img src="{{ asset('uploads/' . $user_need->image) }}" alt=""></td>
                                         <td>
                                             @if ($user_need->admin_id)
-                                                <span class="badge bg-success">{{$user_need->admin->name}}</span>
+                                                <span class="badge bg-success">{{ $user_need->admin->name }}</span>
                                             @else
                                                 <form class="inline-block"
                                                     action='{{ route('user_need.changeStatus', $user_need->id) }}'

@@ -1,6 +1,8 @@
 @extends('layout.master')
 @section('content')
     <x-app-layout>
+        @push('style')
+        @endpush
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="container py-3">
@@ -81,7 +83,7 @@
                             </div>
                             <div class="flex flex-wrap -mx-3 mb-6">
                                 <div class="w-full px-3 text-right">
-                                    <button type="submit"
+                                    <button type="submit" onclick="this.disabled=true; this.form.submit();"
                                         class=" shadow-lg bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                                         Save Kunjungan Tamu
                                     </button>
