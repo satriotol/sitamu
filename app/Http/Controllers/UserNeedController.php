@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\KirimWaJob;
 use App\Mail\UserNeedEmail;
 use App\Models\SurveyAnswer;
 use App\Models\User;
@@ -69,7 +70,11 @@ class UserNeedController extends Controller
             $q->where('name', '!=', 'VISITOR');
         })->get();
         foreach ($admins as $key => $admin) {
-            SendWhatsappService::sendWhatsapp($admin->name, $admin->phone);
+            $asset = [
+                $admin->name,
+                $admin->phone,
+            ];
+            KirimWaJob::dispatch($asset);
         }
         session()->flash('success');
         return redirect(route('user_need.index'));
@@ -168,7 +173,11 @@ class UserNeedController extends Controller
                 $q->where('name', '!=', 'VISITOR');
             })->get();
             foreach ($admins as $key => $admin) {
-                SendWhatsappService::sendWhatsapp($admin->name, $admin->phone);
+                $asset = [
+                    $admin->name,
+                    $admin->phone,
+                ];
+                KirimWaJob::dispatch($asset);
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -183,6 +192,11 @@ class UserNeedController extends Controller
         $user_need->update([
             'admin_id' => Auth::user()->id,
         ]);
+        $asset = [
+            $user_need->user->name,
+            $user_need->user->user_detail->phone,
+        ];
+        KirimWaJob::dispatch($asset);
         SendWhatsappService::sendWhatsappToVisitor($user_need->user->name, $user_need->user->user_detail->phone);
         session()->flash('success');
         return back();
