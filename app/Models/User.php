@@ -80,7 +80,7 @@ class User extends Authenticatable
     public static function getAdmin()
     {
         $user = Auth::user();
-        if ($user->email == 'satriotol69@gmail.com') {
+        if ($user->email != 'satriotol69@gmail.com') {
             return static::where('email', '!=', 'satriotol69@gmail.com')->whereHas('roles', function ($q) {
                 $q->where('name', '!=', 'VISITOR');
             })->get();
