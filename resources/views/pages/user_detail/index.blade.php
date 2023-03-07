@@ -24,10 +24,10 @@
                             <tbody>
                                 @foreach ($user_details as $user_detail)
                                     <tr>
-                                        <td>{{ $user_detail->user->name }}</td>
-                                        <td>{{ $user_detail->user->email }}</td>
+                                        <td class="text-wrap">{{ $user_detail->user?->name }}</td>
+                                        <td>{{ $user_detail->user?->email }}</td>
                                         <td>{{ $user_detail->phone }}</td>
-                                        <td>{{ $user_detail->instansi }}</td>
+                                        <td class="text-wrap">{{ $user_detail->instansi }}</td>
                                         <td><a class="inline-block border border-gray-700 bg-gray-700 text-white rounded-md px-2 py-1 m-1 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline"
                                                 href="{{ route('user_detail.edit', $user_detail->id) }}">
                                                 Edit

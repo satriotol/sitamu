@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -75,5 +76,18 @@ class User extends Authenticatable
     public function getTotalVisitAttribute()
     {
         return (string)$this->user_needs()->count();
+    }
+    public static function getAdmin()
+    {
+        $user = Auth::user();
+        if ($user->email == 'satriotol69@gmail.com') {
+            static::where('email', '!=', 'satriotol69@gmail.com')->whereHas('roles', function ($q) {
+                $q->where('name', '!=', 'VISITOR');
+            })->get();
+        } else {
+            static::whereHas('roles', function ($q) {
+                $q->where('name', '!=', 'VISITOR');
+            })->get();
+        }
     }
 }

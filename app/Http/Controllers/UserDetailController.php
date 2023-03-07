@@ -149,8 +149,10 @@ class UserDetailController extends Controller
     public function destroy(UserDetail $user_detail)
     {
         $user_detail->delete();
-        $user_detail->user->delete();
-        $user_detail->user->user_needs()->delete();
+        if ($user_detail->user()) {
+            $user_detail->user->delete();
+            $user_detail->user->user_needs()->delete();
+        }
         session()->flash('success');
         return redirect(route('user_detail.index'));
     }
