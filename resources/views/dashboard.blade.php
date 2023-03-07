@@ -96,37 +96,29 @@
         @push('scripts')
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
-                const labels = [
-                    @foreach ($data_week['params'] as $key => $params)
-                        '{{ $params }}',
-                    @endforeach
-                ];
-
-                const data = {
-                    labels: labels,
-                    datasets: [{
-                        label: '{{ $data_week['thisMonth'] }}',
-                        backgroundColor: 'rgb(255, 99, 132)',
-                        borderColor: 'rgb(255, 99, 132)',
-                        data: [
-                            @foreach ($data_week['data'] as $key => $data)
-                                '{{ $data }}',
-                            @endforeach
-                        ],
-                    }]
-                };
-
-                const config = {
-                    type: 'line',
-                    data: data,
-                    options: {}
-                };
-            </script>
-            <script>
-                const myChart = new Chart(
-                    document.getElementById('myChart'),
-                    config
-                );
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: {!! json_encode($dataBulanan[0]) !!},
+                        datasets: [{
+                            label: 'Data Bulan Ini',
+                            data: {!! json_encode($dataBulanan[1]) !!},
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255,99,132,1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
             </script>
         @endpush
     </x-app-layout>

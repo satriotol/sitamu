@@ -19,25 +19,28 @@ class DashboardController extends Controller
         $user_need_null = UserNeed::whereNull('admin_id')->count();
         $cctv = Cctv::all()->count();
         $surveyQuestions = SurveyQuestion::all();
+        $dataBulanan = $this->monthlyChart();
+        return view('dashboard', compact('user', 'dataBulanan', 'cctv', 'surveyQuestions',  'user_need_not_null', 'user_need_null'));
+    }
+    public function monthlyChart()
+    {
+        $data = UserNeed::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()])
+            ->get()
+            ->groupBy(function ($item) {
+                return $item->created_at->format('Y-m-d');
+            })
+            ->map(function ($item) {
+                return $item->count();
+            });
 
-        for ($i = 0; $i < 31; $i++) {
-            $params[] = $i + 1;
-        }
+        $labels = [];
+        $values = [];
 
-        // $period = CarbonPeriod::create(Carbon::now()->startOfMonth()->format('Y-m-d'), Carbon::now()->endOfMonth()->format('Y-m-d'));
-        $period = CarbonPeriod::create(Carbon::now()->startOfMonth()->format('Y-m-d'), Carbon::now()->endOfMonth()->format('Y-m-d'));
-        $dates = $period->count();
-        $thisMonth  = Carbon::now()->startOfMonth()->format('F Y');
-        for ($i = 0; $i < $dates; $i++) {
-            $startOfWeek        = Carbon::now()->startOfMonth()->addDay($i);
-            $order_jawa[] = UserNeed::whereNotNull('admin_id')->whereDay('created_at', '=', $startOfWeek)->get()->count();
+        for ($i = 1; $i <= Carbon::now()->daysInMonth; $i++) {
+            $labels[] = $i;
+            $dayData = $data->get(Carbon::createFromDate(null, Carbon::now()->month, $i)->format('Y-m-d'));
+            $values[] = $dayData ? $dayData : 0;
         }
-        $order_jawa;
-        $data_week = [
-            'thisMonth' => "$thisMonth",
-            'params' => $params,
-            'data' => $order_jawa,
-        ];
-        return view('dashboard', compact('user', 'cctv', 'surveyQuestions', 'data_week', 'user_need_not_null', 'user_need_null'));
+        return [$labels, $values];
     }
 }
