@@ -197,7 +197,6 @@ class UserNeedController extends Controller
             $user_need->user->user_detail->phone,
         ];
         KirimWaJob::dispatch($asset);
-        SendWhatsappService::sendWhatsappToVisitor($user_need->user->name, $user_need->user->user_detail->phone);
         session()->flash('success');
         return back();
     }
